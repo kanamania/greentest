@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendEmailJob;
-use App\Notifications\TestEmailNotification;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 
@@ -30,8 +29,7 @@ class HomeController extends Controller
         fgetcsv($file);
         $delay = 1;
         while(false !== ($line = fgetcsv($file))){
-            SendEmailJob::dispatch($line)->delay(now()->addMinutes($delay));
-            //(new TestEmailNotification($line))->delay(now()->addMinutes($delay));
+            SendEmailJob::dispatch($line)->delay(now()->addMinutes($delay))->onQueue('emails');
             $delay++;
         }
         session('status', ['type'=> 'success', 'message' => 'Emails queued to be sent']);

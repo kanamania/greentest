@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Mail\SendTestMail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
@@ -24,14 +25,7 @@ class SendEmailJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $name = $this->data['0'];
         $email = $this->data['1'];
-        $message = $this->data['2'];
-        Mail::send([],[], function($mail) use ($name, $email, $message) {
-            return $mail->to($email)
-                ->subject('Test email from Green Telcom Demo')
-                ->line("Hello <b>{$name}</b>")
-                ->line("Message: {$message}");
-        });
+        Mail::to($email)->send(new SendTestMail($this->data));
     }
 }
