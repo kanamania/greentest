@@ -20,8 +20,8 @@
                                     <label for="file">List of Emails File</label>
                                     <input type="file" name="file" id="file" class="form-control">
                                 </div>
-                                <div class="col-md-2 d-flex align-self-end">
-                                    <button class="btn btn-primary" type="submit">Send</button>
+                                <div class="col-md-2 d-flex align-self-end justify-content-end">
+                                    <button class="btn btn-primary" type="submit">Submit</button>
                                 </div>
                             </div>
                         </form>
